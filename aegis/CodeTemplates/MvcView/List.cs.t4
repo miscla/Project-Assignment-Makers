@@ -1,0 +1,253 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model IEnumerable<#=        "<" + ViewDataTypeName + ">" #>
+<#
+    // The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+    if(IsPartialView) {
+#>
+
+<#
+    } else if(IsLayoutPageSelected) {
+#>
+
+@{
+    ViewBag.Title = "<#=            ViewName#>";
+<#
+        if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#=                LayoutPageFile#>";
+<#
+        }
+#>
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2><#=            ViewName#></h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong><#=            ViewDataTypeShortName #></strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<#
+    } else {
+#>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title><#=            ViewName #></title>
+</head>
+<body>
+<#
+        PushIndent("    ");
+    }
+#>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>List of <#=        ViewDataTypeShortName #></h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
+					</div>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var getQueryStringValue = function (field, url) {
+                var href = url ? url : window.location.href;
+                var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+                var string = reg.exec(href);
+                return string ? string[1] : null;
+            };
+
+            var currentpath = window.location.pathname;
+
+            currentpath = currentpath + "/masters";
+            
+
+            
+            $("#jqGrid").jqGrid({
+                url: currentpath,
+                datatype: "json",
+                mtype: "Get",
+                height: 250,
+                autowidth: true,
+                shrinkToFit: true,
+                rowNum: 20,
+                rowList: [10, 20, 30],
+                colNames: [
+<#
+    foreach (PropertyMetadata property in ModelMetadata.Properties) {
+        if (property.Scaffold && !property.IsAssociation) {
+            if (!property.PropertyName.Contains("DetailForm_")) {
+ #>
+
+<#
+            if (property.IsPrimaryKey) {
+ #>
+        '<#=                    property.PropertyName #>'
+<#
+                } else {
+ #>
+        , '<#=                        property.PropertyName #>'
+<#
+                }
+            }
+        }
+    }
+ #>
+],
+                colModel: [
+<#
+    foreach (PropertyMetadata property in ModelMetadata.Properties) {
+        if (property.Scaffold && !property.IsAssociation) {
+            if (!property.PropertyName.Contains("DetailForm_")) {
+ #>
+
+<#
+                if (property.IsPrimaryKey) {
+ #>
+    { key: true, hidden: true, name: '<#=                        property.PropertyName #>', index: '<#=                        property.PropertyName #>' }
+
+<#
+                } else if (property.TypeName == "System.DateTime") {
+ #>
+
+            , { key: false, name: '<#=property.PropertyName #>', index: '<#=property.PropertyName #>', formatter: 'date' }
+
+<#
+                } else {
+ #>
+        , { key: false, name: '<#=property.PropertyName #>', index: '<#=property.PropertyName #>' }
+<#
+                }
+            }
+        }
+    }
+ #>
+               
+                ],
+                pager: "#jqGridPager",
+                viewrecords: true,
+                loadonce: true,
+                gridView: true,
+                caption: "",
+                hidegrid: false
+            });
+
+            // We need to have a navigation bar in order to add custom buttons to it
+            $('#jqGrid').navGrid('#jqGridPager',
+                { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true });
+
+            // tambah custom edit button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Edit",
+                    caption: "Edit",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Edit/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+                        
+                    }
+                });
+
+            // tambah custom delete button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Delete",
+                    caption: "Delete",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Delete/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+
+                    }
+                });
+
+              // tambah custom detail button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Detail",
+                    caption: "Detail",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Details/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+
+                    }
+                });
+
+         
+
+            // Add responsive to jqGrid
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#table_list_1').setGridWidth(width);
+            });
+
+        });
+    </script>
+}
+
+
+
+<#
+    // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+    if(!IsPartialView && !IsLayoutPageSelected) {
+        ClearIndent();
+#>
+</body>
+</html>
+<#
+    }
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

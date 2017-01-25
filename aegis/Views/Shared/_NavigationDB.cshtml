@@ -1,0 +1,121 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    @using aegis.Models;
+
+    @{
+        var db = new ApplicationDbContext();
+        List<NavigationForm> nflist = new List<NavigationForm>();
+
+        var aegisemail = (Session["aegis-email"] != null) ? Session["aegis-email"].ToString() : "";
+
+        if (Session["aegis-role"] != null && Session["aegis-role"].ToString() == "ADMIN")
+        {
+
+
+            var query = db.moduls.GroupBy(p => new { p.namamodul }).Select(grp => grp.Key);
+            var mains = query.ToList();
+            foreach (var item in mains)
+            {
+                var nf = new NavigationForm();
+                nf.namamodul = item.namamodul;
+
+                List<modul> modullist = db.moduls.Where(s => s.namamodul.Equals(item.namamodul)).ToList();
+                List<NavigationItemForm> nfilist = new List<NavigationItemForm>();
+                foreach (var itm in modullist)
+                {
+                    var nfi = new NavigationItemForm();
+                    nfi.alias = itm.alias;
+                    nfi.modulId = itm.modulId;
+                    nfi.namacontroller = itm.namacontroller;
+
+                    nfilist.Add(nfi);
+                }
+
+                nf.navigationitems = nfilist;
+
+                nflist.Add(nf);
+            }
+        }
+        else if (Session["aegis-role"] != null)
+        {
+            var sessionrole = Session["aegis-role"].ToString();
+            var userrole = db.userroles.Where(s => s.rolename.Equals(sessionrole)).FirstOrDefault();
+            var akses = db.aksess.Where(s => s.userrole.userroleId.Equals(userrole.userroleId)).FirstOrDefault();
+            var aksesline = db.akseslines.Where(s => s.akses.aksesId.Equals(akses.aksesId)).ToList();
+
+            List<int> selectedModuls = new List<int>();
+            foreach (var item in aksesline)
+            {
+                selectedModuls.Add(item.modul.modulId);
+            }
+
+            var query = db.moduls.Where(x => selectedModuls.Contains(x.modulId)).GroupBy(p => new { p.namamodul }).Select(grp => grp.Key);
+            var mains = query.ToList();
+            foreach (var item in mains)
+            {
+                var nf = new NavigationForm();
+                nf.namamodul = item.namamodul;
+
+                List<modul> modullist = db.moduls.Where(s => s.namamodul.Equals(item.namamodul) && selectedModuls.Contains(s.modulId)).ToList();
+                List<NavigationItemForm> nfilist = new List<NavigationItemForm>();
+                foreach (var itm in modullist)
+                {
+                    var nfi = new NavigationItemForm();
+                    nfi.alias = itm.alias;
+                    nfi.modulId = itm.modulId;
+                    nfi.namacontroller = itm.namacontroller;
+
+                    nfilist.Add(nfi);
+                }
+
+                nf.navigationitems = nfilist;
+
+                nflist.Add(nf);
+            }
+
+        }
+
+
+    }
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Selamat datang,</strong>
+                            </span> <span class="text-muted text-xs block">@aegisemail</span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="/">Home</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    AEGIS
+                </div>
+            </li>
+            @foreach (var item in nflist)
+            {
+                <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == item.namamodul) ? "active" : "")">
+                    <a href="#"><i class="fa fa-table"></i> <span class="nav-label">@item.namamodul</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+
+
+
+                        @foreach (var itm in item.navigationitems)
+                        {
+                            <li class="@Html.IsSelected(controller: itm.namacontroller, action: "Index")"><a href="@Url.Action("Index", itm.namacontroller, new { area = item.namamodul })">@itm.alias</a></li>
+                        }
+
+                    </ul>
+                </li>
+            }
+
+
+
+
+
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,72 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Selamat datang,</strong>
+                            </span> <span class="text-muted text-xs block">log out <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+            <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == "Dashboard") ? "active" : "")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Dashboard</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(controller: "productivity", action: "Index")"><a href="@Url.Action("Index", "productivity", new { area = "Dashboard" })">Productivity</a></li>
+                    <li class="@Html.IsSelected(controller: "budget", action: "Index")"><a href="@Url.Action("Index", "budget", new { area = "Dashboard" })">Budget</a></li>
+                    <li class="@Html.IsSelected(controller: "crm", action: "Index")"><a href="@Url.Action("Index", "crm", new { area = "Dashboard" })">CRM</a></li>
+                </ul>
+            </li>
+            <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == "Productivity") ? "active" : "")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Productivity</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(controller: "projectheaders", action: "Index")"><a href="@Url.Action("Index", "projectheaders", new { area = "Productivity" })">Project</a></li>
+                    <li class="@Html.IsSelected(controller: "timesheetheaders", action: "Index")"><a href="@Url.Action("Index", "timesheetheaders", new { area = "Productivity" })">Timesheet</a></li>
+                    <li class="@Html.IsSelected(controller: "bookingitems", action: "Index")"><a href="@Url.Action("Index", "bookingitems", new { area = "Productivity" })">Booking Item</a></li>
+                    <li class="@Html.IsSelected(controller: "bookingplans", action: "Index")"><a href="@Url.Action("Index", "bookingplans", new { area = "Productivity" })">Booking Plan</a></li>
+                </ul>
+            </li>
+            <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == "Budget") ? "active" : "")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Budget</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(controller: "coas", action: "Index")"><a href="@Url.Action("Index", "coas", new { area = "Budget" })">COA</a></li>
+                    <li class="@Html.IsSelected(controller: "purchasecategories", action: "Index")"><a href="@Url.Action("Index", "purchasecategories", new { area = "Budget" })">Purchase Category</a></li>
+                    <li class="@Html.IsSelected(controller: "expensecategories", action: "Index")"><a href="@Url.Action("Index", "expensecategories", new { area = "Budget" })">Expense Category</a></li>
+                    <li class="@Html.IsSelected(controller: "budgetentryheaders", action: "Index")"><a href="@Url.Action("Index", "budgetentryheaders", new { area = "Budget" })">Budget Entry</a></li>
+                    <li class="@Html.IsSelected(controller: "purchaseheaders", action: "Index")"><a href="@Url.Action("Index", "purchaseheaders", new { area = "Budget" })">Purchase Request</a></li>
+                    <li class="@Html.IsSelected(controller: "expenseheaders", action: "Index")"><a href="@Url.Action("Index", "expenseheaders", new { area = "Budget" })">Expense</a></li>
+                    <li class="@Html.IsSelected(controller: "settlementheaders", action: "Index")"><a href="@Url.Action("Index", "settlementheaders", new { area = "Budget" })">Settlement</a></li>
+                </ul>
+            </li>
+            <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == "CRM") ? "active" : "")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">CRM</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(controller: "leads", action: "Index")"><a href="@Url.Action("Index", "leads", new { area = "CRM" })">Lead</a></li>
+                    <li class="@Html.IsSelected(controller: "contacts", action: "Index")"><a href="@Url.Action("Index", "contacts", new { area = "CRM" })">Contact</a></li>
+                    <li class="@Html.IsSelected(controller: "organizations", action: "Index")"><a href="@Url.Action("Index", "organizations", new { area = "CRM" })">Organization</a></li>
+                    <li class="@Html.IsSelected(controller: "pipelines", action: "Index")"><a href="@Url.Action("Index", "pipelines", new { area = "CRM" })">Pipeline</a></li>
+                    <li class="@Html.IsSelected(controller: "stages", action: "Index")"><a href="@Url.Action("Index", "stages", new { area = "CRM" })">Stage</a></li>
+                    <li class="@Html.IsSelected(controller: "opportunities", action: "Index")"><a href="@Url.Action("Index", "opportunities", new { area = "CRM" })">Opportunity</a></li>
+                </ul>
+            </li>
+            <li class="@(((string)ViewContext.RouteData.DataTokens["area"] == "Administration") ? "active" : "")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(controller: "userprofiles", action: "Index")"><a href="@Url.Action("Index", "userprofiles", new { area = "Administration" })">User</a></li>
+                    <li class="@Html.IsSelected(controller: "userroles", action: "Index")"><a href="@Url.Action("Index", "userroles", new { area = "Administration" })">Role</a></li>
+                    <li class="@Html.IsSelected(controller: "moduls", action: "Index")"><a href="@Url.Action("Index", "moduls", new { area = "Administration" })">Modul</a></li>
+                    <li class="@Html.IsSelected(controller: "akses", action: "Index")"><a href="@Url.Action("Index", "akses", new { area = "Administration" })">Akses</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,158 @@
+﻿@using aegis.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+
+    var db = new ApplicationDbContext();
+
+    decimal total = 0;
+    decimal won = 0;
+    decimal loose = 0;
+    decimal open = 0;
+
+    decimal initial = 0;
+    decimal meeting = 0;
+    decimal proposal = 0;
+    decimal close = 0;
+
+    List<opportunity> opps = new List<opportunity>();
+    opps = db.opportunitys.ToList();
+
+    total = opps.Sum(x => x.value);
+    total = total / 1000000000;
+    won = opps.Where(x => x.statusopportunity.statusopportunityId.Equals(3)).Sum(x => x.value);
+    won = won / 1000000000;
+    loose = opps.Where(x => x.statusopportunity.statusopportunityId.Equals(4)).Sum(x => x.value);
+    loose = loose / 1000000000;
+    open = opps.Where(x => x.statusopportunity.statusopportunityId.Equals(1) || x.statusopportunity.statusopportunityId.Equals(2)).Sum(x => x.value);
+    open = open / 1000000000;
+
+    initial = opps.Where(x => x.stage.stageId.Equals(1) || x.stage.stageId.Equals(2)).Sum(x => x.value);
+    initial = initial / 1000000000;
+    meeting = opps.Where(x => x.stage.stageId.Equals(3)).Sum(x => x.value);
+    meeting = meeting / 1000000000;
+    proposal = opps.Where(x => x.stage.stageId.Equals(4)).Sum(x => x.value);
+    proposal = proposal / 1000000000;
+    close = opps.Where(x => x.stage.stageId.Equals(5)).Sum(x => x.value);
+    close = close / 1000000000;
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="widget style1">
+            <div class="row">
+                <div class="col-xs-4 text-center">
+                    <i class="fa fa-trophy fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Opportunity (Rp. M) </span>
+                    <h2 class="font-bold">@total.ToString()</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget style1 navy-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-gear fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> WON (Rp. M)</span>
+                    <h2 class="font-bold">@won.ToString()</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-spinner fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Loose (Rp. M)</span>
+                    <h2 class="font-bold">@loose.ToString()</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget style1 yellow-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-circle-o-notch fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Open (Rp. M)</span>
+                    <h2 class="font-bold">@open.ToString()</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="widget lazur-bg no-padding">
+            <div class="p-m">
+                <h1 class="m-xs">Rp. @initial.ToString()</h1>
+
+                <h3 class="font-bold no-margins">
+                    Stage
+                </h3>
+                <small>Initial contact</small>
+            </div>
+            <div class="flot-chart">
+                <div class="flot-chart-content" id="flot-chart2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget navy-bg no-padding">
+            <div class="p-m">
+                <h1 class="m-xs">Rp. @meeting.ToString()</h1>
+
+                <h3 class="font-bold no-margins">
+                    Stage
+                </h3>
+                <small>Meeting</small>
+            </div>
+            <div class="flot-chart">
+                <div class="flot-chart-content" id="flot-chart2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget yellow-bg no-padding">
+            <div class="p-m">
+                <h1 class="m-xs">Rp. @proposal.ToString()</h1>
+
+                <h3 class="font-bold no-margins">
+                    Stage
+                </h3>
+                <small>Proposal</small>
+            </div>
+            <div class="flot-chart">
+                <div class="flot-chart-content" id="flot-chart2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="widget red-bg no-padding">
+            <div class="p-m">
+                <h1 class="m-xs">Rp. @close.ToString()</h1>
+
+                <h3 class="font-bold no-margins">
+                    Stage
+                </h3>
+                <small>Close</small>
+            </div>
+            <div class="flot-chart">
+                <div class="flot-chart-content" id="flot-chart2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
