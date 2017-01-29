@@ -67,9 +67,11 @@ namespace aegis.Models
 
         [Display(Name = "Account Name")]
         public string name { get; set; }
-
+        
         public string telephone { get; set; }
-
+        
+        [Required]
+        [EmailAddress]
         public string email { get; set; }
 
         public string address { get; set; }
@@ -249,6 +251,7 @@ namespace aegis.Models
 
         [Display(Name = "Description")]
         public string description { get; set; }
+        
         public decimal costprice { get; set; }
         public decimal salesprice { get; set; }
         public int producttypeId { get; set; }

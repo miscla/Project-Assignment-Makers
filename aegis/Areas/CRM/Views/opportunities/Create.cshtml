@@ -1,0 +1,163 @@
+﻿@model aegis.Models.opportunity
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Create</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("List", "Index")
+            </li>
+            <li class="active">
+                <strong>Create</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Create opportunity</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stageId, "stageId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("stageId", (IEnumerable<SelectListItem>)ViewBag.stageIdList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.stageId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.statusopportunityId, "statusopportunityId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("statusopportunityId", (IEnumerable<SelectListItem>)ViewBag.statusopportunityIdList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.statusopportunityId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.accountId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.code, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.EditorFor(model => model.code)
+                @Html.ValidationMessageFor(model => model.code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.EditorFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.value, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.EditorFor(model => model.value)
+                @Html.ValidationMessageFor(model => model.value)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.winningprobability, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            @Html.EditorFor(model => model.winningprobability)
+                @Html.ValidationMessageFor(model => model.winningprobability)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.forecastclosedate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group date" id="forecastclosedate">
+                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    @Html.EditorFor(model => model.forecastclosedate, new { @class= "form-control" })
+                </div>
+
+                @Html.ValidationMessageFor(model => model.forecastclosedate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+@section Scripts{
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/jqGrid")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+ $('#forecastclosedate').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+
+
+
+
+     });
+    </script>
+
+}

@@ -1,0 +1,337 @@
+﻿@model aegis.Models.cases
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Edit</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("List", "Index")
+            </li>
+            <li class="active">
+                <strong>Edit</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Edit cases</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.casesId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.code, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.code)
+                @Html.ValidationMessageFor(model => model.code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description)
+                @Html.ValidationMessageFor(model => model.description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.reporteddate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group date" id="reporteddate">
+                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    @Html.EditorFor(model => model.reporteddate, new { @class= "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.reporteddate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.accountId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.productId, "productId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("productId", (IEnumerable<SelectListItem>)ViewBag.productIdList, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.productId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.statuscaseId, "statuscaseId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("statuscaseId", (IEnumerable<SelectListItem>)ViewBag.statuscaseIdList, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.statuscaseId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.DetailForm_pkidx_caseslineId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.DetailForm_actiondate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.DetailForm_actiondescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+    </div>
+}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Detail List</h5>
+                </div>
+                <div class="ibox-content">
+
+
+                    <div class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/jqGrid")
+	@Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+ $('#reporteddate').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+
+   
+
+            var getQueryStringValue = function (field, url) {
+                var href = url ? url : window.location.href;
+                var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+                var string = reg.exec(href);
+                return string ? string[1] : null;
+            };
+
+            var currentpath = window.location.pathname;
+            var removepath1 = currentpath.substr(currentpath.lastIndexOf('/') + 0) + '$';
+            currentpath = currentpath.replace(new RegExp(removepath1), '');
+
+            var removepath2 = currentpath.substr(currentpath.lastIndexOf('/') + 1) + '$';
+            currentpath = currentpath.replace(new RegExp(removepath2), '');
+
+            var fkidx = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+            var url = currentpath + "lines/" + fkidx;
+            var urlAdd = currentpath + "LineCreate";
+            var urlEdit = currentpath + "LineEdit";
+            var urlDelete = currentpath + "LineDelete";
+
+
+
+
+            $("#jqGrid").jqGrid({
+                url: url,
+                datatype: "json",
+                mtype: "Get",
+                height: 250,
+                autowidth: true,
+                shrinkToFit: true,
+                rowNum: 20,
+                rowList: [10, 20, 30],
+                colNames: [
+                'caseslineId'
+
+
+            , 'actiondate'
+
+                , 'actiondescription'
+],
+                colModel: [
+                { key: true, hidden: true, editable: true, editrules: { edithidden: false }, name: 'caseslineId', index: 'caseslineId' }
+
+                 , {
+                    key: false, editable: true, name: 'actiondate', index: 'actiondate', formatter: 'date', editoptions: {
+                        size: 20,
+                        maxlength: 10,
+                        dataInit: function (element) {
+                            $(element).datepicker(
+                                    {
+                                        dateFormat: 'yy-mm-dd',
+                                        constrainInput: false,
+                                        showOn: 'button',
+                                        buttonText: '...',
+                                        autoClose: true
+                                    }
+                                );
+                        }
+                    }
+                }
+
+                , { key: false, editable: true, name: 'actiondescription', index: 'actiondescription'}
+                ],
+                pager: "#jqGridPager",
+                viewrecords: true,
+                loadonce: false,
+                caption: "",
+                add: true,
+                edit: true,
+                addtext: 'Add',
+                edittext: 'Edit',
+                hidegrid: false,
+                onSelectRow: function (ids) {
+                    if (ids) {
+                        var ret = jQuery("#jqGrid").jqGrid('getRowData', ids);
+                        key = ret.caseslineId;
+                    }
+                }
+            });
+
+            // We need to have a navigation bar in order to add custom buttons to it
+            $('#jqGrid').navGrid('#jqGridPager',
+            { edit: true, add: true, del: true, search: true, refresh: true, view: false, position: "left", cloneToTop: true },
+            {
+                //edit
+                zIndex: 100,
+                url: urlEdit,
+                closeOnEscape: true,
+                closeAfterEdit: true,
+                recreateForm: true,
+                afterComplete: function () {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                },
+                editData: {
+                    fkidx: fkidx
+                }
+            }, {
+                zIndex: 100,
+                url: urlAdd,
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                afterComplete: function () {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                },
+                editData: {
+                    fkidx: fkidx
+                }
+            }, {
+                zIndex: 100,
+                url: urlDelete,
+                closeOnEscape: true,
+                closeAfterDelete: true,
+                afterComplete: function () {
+                    if (response.responseText) {
+                        alert(response.responseText);
+                    }
+                },
+                delData: {
+                    key: function () {
+                        return key;
+                    }
+                }
+            });
+
+         
+
+
+
+            // Add responsive to jqGrid
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#table_list_1').setGridWidth(width);
+            });
+
+
+        
+
+
+        });
+    </script>
+
+    }
+
+
+
+

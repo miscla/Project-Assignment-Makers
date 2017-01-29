@@ -172,6 +172,22 @@
     <Compile Include="Areas\Administration\Controllers\modulsController.cs" />
     <Compile Include="Areas\Administration\Controllers\userprofilesController.cs" />
     <Compile Include="Areas\Administration\Controllers\userrolesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\accountsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\campaignsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\casesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\invoicesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\leadsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\marketinglistsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\opportunitiesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\ordersController.cs" />
+    <Compile Include="Areas\CRM\Controllers\organizationsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\organizationtypesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\pipesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\productsController.cs" />
+    <Compile Include="Areas\CRM\Controllers\producttypesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\quotesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\stagesController.cs" />
+    <Compile Include="Areas\CRM\Controllers\statusopportunitiesController.cs" />
     <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -180,6 +196,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Migrations\201701250951198_awal.cs" />
+    <Compile Include="Migrations\201701250951198_awal.Designer.cs">
+      <DependentUpon>201701250951198_awal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701281547586_awal2.cs" />
+    <Compile Include="Migrations\201701281547586_awal2.Designer.cs">
+      <DependentUpon>201701281547586_awal2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppModel.cs" />
     <Compile Include="Models\CRMModel.cs" />
@@ -468,6 +493,86 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\CRM\Views\products\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\products\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\products\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\products\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\products\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\accounts\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\accounts\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\accounts\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\accounts\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\accounts\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\opportunities\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\opportunities\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\opportunities\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\opportunities\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\opportunities\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\quotes\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\quotes\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\quotes\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\quotes\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\quotes\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\orders\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\orders\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\orders\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\orders\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\orders\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\invoices\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\invoices\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\invoices\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\invoices\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\invoices\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\marketinglists\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\marketinglists\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\marketinglists\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\marketinglists\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\marketinglists\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\campaigns\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\campaigns\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\campaigns\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\campaigns\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\campaigns\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\producttypes\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\producttypes\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\producttypes\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\producttypes\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\producttypes\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\organizationtypes\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\organizationtypes\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\organizationtypes\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\organizationtypes\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\organizationtypes\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\organizations\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\organizations\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\organizations\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\organizations\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\organizations\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\pipes\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\pipes\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\pipes\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\pipes\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\pipes\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\stages\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\stages\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\stages\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\stages\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\stages\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\statusopportunities\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\statusopportunities\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\statusopportunities\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\statusopportunities\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\statusopportunities\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\leads\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\leads\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\leads\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\leads\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\leads\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -956,7 +1061,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
-    <Folder Include="Areas\CRM\Controllers\" />
     <Folder Include="Areas\CRM\Models\" />
     <Folder Include="Areas\CRM\Views\Shared\" />
   </ItemGroup>
@@ -967,6 +1071,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701250951198_awal.resx">
+      <DependentUpon>201701250951198_awal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701281547586_awal2.resx">
+      <DependentUpon>201701281547586_awal2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

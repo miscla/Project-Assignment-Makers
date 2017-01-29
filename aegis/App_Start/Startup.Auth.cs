@@ -17,7 +17,6 @@ namespace aegis
             /// => isi table dengan seed data
             //var init = new Models.Initializer();
             //init.run(ApplicationDbContext.Create());
-            /// <=
 
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<aegis.Models.account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Index</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>account</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>List of account</h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
+					</div>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var getQueryStringValue = function (field, url) {
+                var href = url ? url : window.location.href;
+                var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+                var string = reg.exec(href);
+                return string ? string[1] : null;
+            };
+
+            var currentpath = window.location.pathname;
+
+            currentpath = currentpath + "/masters";
+            
+
+            
+            $("#jqGrid").jqGrid({
+                url: currentpath,
+                datatype: "json",
+                mtype: "Get",
+                height: 250,
+                autowidth: true,
+                shrinkToFit: true,
+                rowNum: 20,
+                rowList: [10, 20, 30],
+                colNames: [
+
+        'accountId'
+
+        , 'code'
+
+        , 'name'
+
+        , 'telephone'
+
+        , 'email'
+
+        , 'address'
+
+        , 'accounttypeId'
+
+        , 'leadsourceId'
+
+        , 'statusleadId'
+],
+                colModel: [
+
+    { key: true, hidden: true, name: 'accountId', index: 'accountId' }
+
+
+        , { key: false, name: 'code', index: 'code' }
+
+        , { key: false, name: 'name', index: 'name' }
+
+        , { key: false, name: 'telephone', index: 'telephone' }
+
+        , { key: false, name: 'email', index: 'email' }
+
+        , { key: false, name: 'address', index: 'address' }
+
+        , { key: false, name: 'accounttypeId', index: 'accounttypeId' }
+
+        , { key: false, name: 'leadsourceId', index: 'leadsourceId' }
+
+        , { key: false, name: 'statusleadId', index: 'statusleadId' }
+               
+                ],
+                pager: "#jqGridPager",
+                viewrecords: true,
+                loadonce: true,
+                gridView: true,
+                caption: "",
+                hidegrid: false
+            });
+
+            // We need to have a navigation bar in order to add custom buttons to it
+            $('#jqGrid').navGrid('#jqGridPager',
+                { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true });
+
+            // tambah custom edit button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Edit",
+                    caption: "Edit",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Edit/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+                        
+                    }
+                });
+
+            // tambah custom delete button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Delete",
+                    caption: "Delete",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Delete/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+
+                    }
+                });
+
+              // tambah custom detail button
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    title: "Detail",
+                    caption: "Detail",
+                    position: "last",
+                    onClickButton: function () {
+                        var grid = $("#jqGrid");
+                        var rowid = grid.jqGrid('getGridParam', 'selrow');
+                        if (rowid != null) {
+                            window.location = window.location.pathname + "/Details/" + rowid;
+                        } else {
+                            alert("Silahkan pilih record terlebih dahulu.");
+                        }
+
+                    }
+                });
+
+         
+
+            // Add responsive to jqGrid
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#table_list_1').setGridWidth(width);
+            });
+
+        });
+    </script>
+}
+
+
+
