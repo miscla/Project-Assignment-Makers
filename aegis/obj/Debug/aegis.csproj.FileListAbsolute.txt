@@ -39,3 +39,6 @@ C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug
 C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug\aegis.csprojResolveAssemblyReference.cache
 C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug\aegis.Migrations.awal2.resources
+C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug\aegis.Migrations.awal21.resources
+C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug\aegis.Migrations.awal22.resources
+C:\Users\Furion\Desktop\Project Makers\Project-Assignment-Makers\aegis\obj\Debug\aegis.Migrations.awal23.resources

@@ -204,6 +204,18 @@
     <Compile Include="Migrations\201701281547586_awal2.Designer.cs">
       <DependentUpon>201701281547586_awal2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701300728054_awal21.cs" />
+    <Compile Include="Migrations\201701300728054_awal21.Designer.cs">
+      <DependentUpon>201701300728054_awal21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701300756394_awal22.cs" />
+    <Compile Include="Migrations\201701300756394_awal22.Designer.cs">
+      <DependentUpon>201701300756394_awal22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701300830391_awal23.cs" />
+    <Compile Include="Migrations\201701300830391_awal23.Designer.cs">
+      <DependentUpon>201701300830391_awal23.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppModel.cs" />
@@ -1078,6 +1090,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701281547586_awal2.resx">
       <DependentUpon>201701281547586_awal2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701300728054_awal21.resx">
+      <DependentUpon>201701300728054_awal21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701300756394_awal22.resx">
+      <DependentUpon>201701300756394_awal22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701300830391_awal23.resx">
+      <DependentUpon>201701300830391_awal23.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

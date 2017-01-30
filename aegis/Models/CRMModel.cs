@@ -63,17 +63,21 @@ namespace aegis.Models
         public int accountId { get; set; }
 
         [Display(Name = "Account Code")]
+        [Required(ErrorMessage = "Required")]
         public string code { get; set; }
 
         [Display(Name = "Account Name")]
+        [Required(ErrorMessage = "Required")]
         public string name { get; set; }
-        
+
+        [Required(ErrorMessage = "Required")]
         public string telephone { get; set; }
         
         [Required]
         [EmailAddress]
         public string email { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         public string address { get; set; }
 
         [Display(Name = "Account Type")]
@@ -244,15 +248,22 @@ namespace aegis.Models
         public int productId { get; set; }
 
         [Display(Name = "Product Code")]
+        [Required(ErrorMessage = "Required")]
         public string code { get; set; }
 
         [Display(Name = "Product Name")]
+        [Required(ErrorMessage = "Required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required]
+        [StringLength(50, ErrorMessage = "Maximum 50 character")]
         public string description { get; set; }
-        
+
+        [Required(ErrorMessage = "Required")]
         public decimal costprice { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public decimal salesprice { get; set; }
         public int producttypeId { get; set; }
         public virtual producttype producttype { get; set; }
@@ -264,14 +275,19 @@ namespace aegis.Models
         public int quoteId { get; set; }
 
         [Display(Name = "Quote Code")]
+        [Required(ErrorMessage = "Required")]
         public string code { get; set; }
 
         [Display(Name = "Quote Name")]
+        [Required(ErrorMessage = "Required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required]
+        [StringLength(50, ErrorMessage = "Maximum 50 character")]
         public string description { get; set; }
         [Display(Name = "Account")]
+        [Required(ErrorMessage = "Required")]
         public int accountId { get; set; }
         public virtual account account { get; set; }
         [Display(Name = "Est Start Date")]
@@ -305,12 +321,15 @@ namespace aegis.Models
         public int orderId { get; set; }
 
         [Display(Name = "Order Code")]
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
         [Display(Name = "Order Name")]
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "required")]
         public string description { get; set; }
         [Display(Name = "Account")]
         public int accountId { get; set; }
@@ -319,7 +338,9 @@ namespace aegis.Models
         public DateTime orderdate { get; set; }
         [Display(Name = "Requested Ship Date")]
         public DateTime shipdate { get; set; }
+        [Required(ErrorMessage = "required")]
         public string address { get; set; }
+        [Required(ErrorMessage = "required")]
         public string shipaddress { get; set; }
         public virtual List<orderline> orderline { get; set; }
         public string DetailForm_pkidx_orderlineId { get; set; }
@@ -348,12 +369,15 @@ namespace aegis.Models
         public int invoiceId { get; set; }
 
         [Display(Name = "Invoice Code")]
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
         [Display(Name = "Invoice Name")]
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "required")]
         public string description { get; set; }
         [Display(Name = "Account")]
         public int accountId { get; set; }
@@ -361,6 +385,7 @@ namespace aegis.Models
         [Display(Name = "Invoice Date")]
         public DateTime invoicedate { get; set; }
         [Display(Name = "Billing Address")]
+        [Required(ErrorMessage = "required")]
         public string billingaddress { get; set; }
         public virtual List<invoiceline> invoiceline { get; set; }
         public string DetailForm_pkidx_invoicelineId { get; set; }
@@ -389,12 +414,15 @@ namespace aegis.Models
         public int marketinglistId { get; set; }
 
         [Display(Name = "Marketing List Code")]
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
         [Display(Name = "Marketing List Name")]
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "required")]
         public string description { get; set; }
         [Display(Name = "Start Date")]
         public DateTime startdate { get; set; }
@@ -436,12 +464,15 @@ namespace aegis.Models
         public int campaignId { get; set; }
 
         [Display(Name = "Campaign Code")]
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
         [Display(Name = "Campaign Name")]
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "required")]
         public string description { get; set; }
         [Display(Name = "Start Date")]
         public DateTime startdate { get; set; }
@@ -490,12 +521,15 @@ namespace aegis.Models
         public int casesId { get; set; }
 
         [Display(Name = "Cases Code")]
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
         [Display(Name = "Cases Name")]
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "required")]
         public string description { get; set; }
         [Display(Name = "Reported Date")]
         public DateTime reporteddate { get; set; }
@@ -527,8 +561,10 @@ namespace aegis.Models
     {
         public int organizationtypeId { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
         public string description { get; set; }
 
@@ -539,13 +575,21 @@ namespace aegis.Models
     {
         public int organizationId { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string name { get; set; }
         public string description { get; set; }
         public string fulladdress { get; set; }
+
+        [Required(ErrorMessage = "required")]
         public string phone { get; set; }
+        [Required]
+        [EmailAddress]
         public string email { get; set; }
+        [Required]
+        [Url]
         public string website { get; set; }
         public int organizationtypeId { get; set; }
         public virtual organizationtype organizationtype { get; set; }
@@ -557,16 +601,23 @@ namespace aegis.Models
     {
         public int leadId { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public string firstname { get; set; }
+
+        [Required(ErrorMessage = "required")]
         public string lastname { get; set; }
         public int organizationId { get; set; }
         public virtual organization organization { get; set; }
 
+        [Required(ErrorMessage = "required")]
         public int rating { get; set; }
 
         public virtual ApplicationUser pic { get; set; }
+        [Required]
+        [EmailAddress]
         public string email { get; set; }
         public string phone { get; set; }
 
